@@ -22,12 +22,15 @@ def standardize_text(text):
     line_text = ' '.join(text.split())
     splitted_text = line_text.split('. ')
     text_capitalized = []
+    # for i in range(len(splitted_text)):
+    #     if i == 0:
+    #         sent = splitted_text[i][0].upper() + splitted_text[i][1:]
+    #         text_capitalized.append(sent)
+
+    #         text_b_standardized[0].lower() + text_b_standardized[1:]
+    #     else:
     for sentence in splitted_text:
-        # if i == 0:
-        #     sent = splitted_text[i][1:]
-        #     text_capitalized.append(sent.capitalize())
-        # else:
-        text_capitalized.append(sentence.capitalize())
+        text_capitalized.append(sentence[0].upper() + sentence[1:])
 
     return '. '.join(text_capitalized)
 
@@ -57,7 +60,11 @@ def text_merge(text_a, text_b):
     text_a_standardized = standardize_text(text_a)
     text_b_standardized = standardize_text(text_b)
 
-    text_a_dot_removed = text_a_standardized[:-1]
+    text_a_dot_removed = ''
+    if text_a_standardized[-1] == '.':
+        text_a_dot_removed += text_a_standardized[:-1]
+    else:
+        text_a_dot_removed += text_a_standardized
     text_b_lowered = text_b_standardized[0].lower() + text_b_standardized[1:]
 
     output = text_a_dot_removed + ' ' + text_b_lowered
